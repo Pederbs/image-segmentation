@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-07-08T15:07:20.477214",
+  "dataset_path": "/home/anna/msc_oppgave/image-segmentation/test128x128GAT_19to24_100p",
+  "variables_found": [
+    "vo",
+    "chl",
+    "phyc",
+    "o2",
+    "nppv",
+    "catch",
+    "si",
+    "no3",
+    "kd",
+    "po4",
+    "uo",
+    "thetao",
+    "zooc",
+    "so"
+  ],
+  "file_counts": {
+    "vo": 0,
+    "chl": 0,
+    "phyc": 0,
+    "o2": 0,
+    "nppv": 0,
+    "catch": 549,
+    "si": 0,
+    "no3": 0,
+    "kd": 0,
+    "po4": 0,
+    "uo": 0,
+    "thetao": 0,
+    "zooc": 0,
+    "so": 0
+  },
+  "total_files": 549,
+  "input_variables": [
+    "thetao",
+    "so",
+    "o2"
+  ],
+  "target_variable": "catch"
+}

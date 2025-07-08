@@ -1,0 +1,31 @@
+
+=== PIPELINE COMPLETE ===
+
+Dataset Creation Summary:
+- Original dataset: /home/anna/msc_oppgave/image-segmentation/test128x128GAT_19to24_100p
+- Final dataset: /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset
+- Train samples: 439
+- Test samples: 110
+- Total samples: 549
+- Input variables: thetao, so, o2 (combined as RGB)
+- Target variable: catch
+- Image dimensions: 256x256 (resized)
+
+Files created:
+- /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset/images_prepped_train/ (439 RGB images)
+- /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset/annotations_prepped_train/ (439 target images)
+- /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset/images_prepped_test/ (110 RGB images)
+- /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset/annotations_prepped_test/ (110 target images)
+
+Plots saved in: ./plots
+- original_data/: Original dataset analysis
+- restructured_data/: Train/test split analysis
+- rgb_creation/: RGB combination samples
+- validation/: Final dataset validation
+
+Next steps:
+1. Review all plots in ./plots
+2. Train your model using the skagerakk_dataset
+3. Use keras-segmentation with the prepared dataset structure
+
+Dataset is ready for training!

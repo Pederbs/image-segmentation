@@ -1,0 +1,66 @@
+[2025-07-08 15:07:19] === Skagerakk Dataset Pipeline Started ===
+[2025-07-08 15:07:19] Output directory: .
+[2025-07-08 15:07:19] Plots directory: ./plots
+[2025-07-08 15:07:19] Images will be resized to: 256x256
+[2025-07-08 15:07:19] Analyzing original dataset structure...
+[2025-07-08 15:07:20] Warning: No PNG files found in /home/anna/msc_oppgave/image-segmentation/test128x128GAT_19to24_100p/thetao
+[2025-07-08 15:07:20] Warning: No PNG files found in /home/anna/msc_oppgave/image-segmentation/test128x128GAT_19to24_100p/so
+[2025-07-08 15:07:20] Warning: No PNG files found in /home/anna/msc_oppgave/image-segmentation/test128x128GAT_19to24_100p/o2
+[2025-07-08 15:07:20] Original dataset analysis complete. Found 14 variables with 549 total files.
+[2025-07-08 15:07:20] Restructuring dataset into train/test splits...
+[2025-07-08 15:07:20] Extracted 549 dates from 549 files
+[2025-07-08 15:07:20] Found 549 unique dates. Train: 439, Test: 110
+[2025-07-08 15:07:20]   catch: 439 train, 110 test files
+[2025-07-08 15:07:20]   chl: 439 train, 110 test files
+[2025-07-08 15:07:20]   kd: 439 train, 110 test files
+[2025-07-08 15:07:20]   no3: 439 train, 110 test files
+[2025-07-08 15:07:20]   nppv: 439 train, 110 test files
+[2025-07-08 15:07:20]   o2: 439 train, 110 test files
+[2025-07-08 15:07:20]   phyc: 439 train, 110 test files
+[2025-07-08 15:07:20]   po4: 439 train, 110 test files
+[2025-07-08 15:07:20]   si: 439 train, 110 test files
+[2025-07-08 15:07:20]   so: 439 train, 110 test files
+[2025-07-08 15:07:21]   thetao: 439 train, 110 test files
+[2025-07-08 15:07:21]   uo: 439 train, 110 test files
+[2025-07-08 15:07:21]   vo: 439 train, 110 test files
+[2025-07-08 15:07:21]   zooc: 439 train, 110 test files
+[2025-07-08 15:07:21] Dataset restructuring complete.
+[2025-07-08 15:07:21] Creating final dataset with RGB images (resized to 256x256)...
+[2025-07-08 15:07:21] Processing 439 training images...
+[2025-07-08 15:07:32] Processing 110 test images...
+[2025-07-08 15:07:39] Dataset creation complete! Train: 439, Test: 110
+[2025-07-08 15:07:39] Validating final dataset...
+[2025-07-08 15:07:42] Dataset validation complete! Train: 439, Test: 110
+[2025-07-08 15:07:42] 
+=== PIPELINE COMPLETE ===
+
+Dataset Creation Summary:
+- Original dataset: /home/anna/msc_oppgave/image-segmentation/test128x128GAT_19to24_100p
+- Final dataset: /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset
+- Train samples: 439
+- Test samples: 110
+- Total samples: 549
+- Input variables: thetao, so, o2 (combined as RGB)
+- Target variable: catch
+- Image dimensions: 256x256 (resized)
+
+Files created:
+- /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset/images_prepped_train/ (439 RGB images)
+- /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset/annotations_prepped_train/ (439 target images)
+- /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset/images_prepped_test/ (110 RGB images)
+- /home/anna/msc_oppgave/image-segmentation/skagerakk_dataset/annotations_prepped_test/ (110 target images)
+
+Plots saved in: ./plots
+- original_data/: Original dataset analysis
+- restructured_data/: Train/test split analysis
+- rgb_creation/: RGB combination samples
+- validation/: Final dataset validation
+
+Next steps:
+1. Review all plots in ./plots
+2. Train your model using the skagerakk_dataset
+3. Use keras-segmentation with the prepared dataset structure
+
+Dataset is ready for training!
+
+[2025-07-08 15:07:42] === Pipeline completed successfully! ===

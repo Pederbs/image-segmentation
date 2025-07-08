@@ -1,3 +1,5 @@
+# Combined requirements for keras-segmentation and automation pipeline
+# Core dependencies
 absl-py==2.3.1
 asttokens==3.0.0
 astunparse==1.6.3
@@ -24,32 +26,50 @@ ipython==8.37.0
 jedi==0.19.2
 jupyter_client==8.6.3
 jupyter_core==5.8.1
+
+# Machine Learning and Deep Learning
 keras==3.10.0
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 keras-segmentation==0.3.0
+tensorflow==2.19.0
+tensorflow-io-gcs-filesystem==0.37.1
+tensorboard==2.19.0
+tensorboard-data-server==0.7.2
+ml_dtypes==0.5.1
+namex==0.1.0
+optree==0.16.0
+
+# Image Processing and Computer Vision
+opencv-python==4.11.0.86
+pillow==11.3.0
+scikit-image==0.25.2
+PyWavelets==1.8.0
+tifffile==2025.5.10
+
+# Data Processing and Scientific Computing
+numpy==1.26.4
+pandas==2.3.0
+scipy==1.15.3
+
+# Visualization and Plotting
+matplotlib==3.10.3
+matplotlib-inline==0.1.7
+
+# Utilities and Support
 kiwisolver==1.4.8
 lazy_loader==0.4
 libclang==18.1.1
 Markdown==3.8.2
 markdown-it-py==3.0.0
 MarkupSafe==3.0.2
-matplotlib==3.10.3
-matplotlib-inline==0.1.7
 mdurl==0.1.2
-ml_dtypes==0.5.1
-namex==0.1.0
 nest-asyncio==1.6.0
 networkx==3.4.2
-numpy==1.26.4
-opencv-python==4.11.0.86
 opt_einsum==3.4.0
-optree==0.16.0
 packaging==25.0
-pandas==2.3.0
 parso==0.8.4
 pexpect==4.9.0
-pillow==11.3.0
 platformdirs==4.3.8
 prompt_toolkit==3.0.51
 protobuf==5.29.5
@@ -60,22 +80,14 @@ Pygments==2.19.2
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
 pytz==2025.2
-PyWavelets==1.8.0
 PyYAML==6.0.2
 pyzmq==27.0.0
 requests==2.32.4
 rich==14.0.0
-scikit-image==0.25.2
-scipy==1.15.3
 shapely==2.1.1
 six==1.17.0
 stack-data==0.6.3
-tensorboard==2.19.0
-tensorboard-data-server==0.7.2
-tensorflow==2.19.0
-tensorflow-io-gcs-filesystem==0.37.1
 termcolor==3.1.0
-tifffile==2025.5.10
 tornado==6.5.1
 tqdm==4.67.1
 traitlets==5.14.3
