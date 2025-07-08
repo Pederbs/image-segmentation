@@ -106,3 +106,7 @@ ENV/
 
 # VSCode settings
 .vscode/
+cityscapes5epoch-model.keras
+__MACOSX/
+cityscapes5epoch-weights.weights.h5
+saved_models/fcn8_final_weights.weights.h5
