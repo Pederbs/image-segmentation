@@ -289,7 +289,12 @@ def evaluate(model=None, inp_images=None, annotations=None,
     tp = np.zeros(model.n_classes)
     fp = np.zeros(model.n_classes)
     fn = np.zeros(model.n_classes)
+    tn = np.zeros(model.n_classes)
     n_pixels = np.zeros(model.n_classes)
+    
+    # Global pixel accuracy counters
+    total_pixels = 0
+    correct_pixels = 0
 
     for inp, ann in tqdm(zip(inp_images, annotations)):
         pr = predict(model, inp, read_image_type=read_image_type)
@@ -299,21 +304,73 @@ def evaluate(model=None, inp_images=None, annotations=None,
         gt = gt.argmax(-1)
         pr = pr.flatten()
         gt = gt.flatten()
+        
+        # Calculate pixel accuracy for this image
+        correct_pixels += np.sum(pr == gt)
+        total_pixels += len(pr)
 
         for cl_i in range(model.n_classes):
-
             tp[cl_i] += np.sum((pr == cl_i) * (gt == cl_i))
-            fp[cl_i] += np.sum((pr == cl_i) * ((gt != cl_i)))
-            fn[cl_i] += np.sum((pr != cl_i) * ((gt == cl_i)))
+            fp[cl_i] += np.sum((pr == cl_i) * (gt != cl_i))
+            fn[cl_i] += np.sum((pr != cl_i) * (gt == cl_i))
+            tn[cl_i] += np.sum((pr != cl_i) * (gt != cl_i))
             n_pixels[cl_i] += np.sum(gt == cl_i)
 
-    cl_wise_score = tp / (tp + fp + fn + 0.000000000001)
+    # IoU calculations
+    cl_wise_iou = tp / (tp + fp + fn + 1e-10)
     n_pixels_norm = n_pixels / np.sum(n_pixels)
-    frequency_weighted_IU = np.sum(cl_wise_score*n_pixels_norm)
-    mean_IU = np.mean(cl_wise_score)
+    frequency_weighted_IU = np.sum(cl_wise_iou * n_pixels_norm)
+    mean_IU = np.mean(cl_wise_iou)
+    
+    # Additional metrics
+    pixel_accuracy = correct_pixels / total_pixels
+    
+    # Class-wise precision, recall, F1-score
+    cl_wise_precision = tp / (tp + fp + 1e-10)
+    cl_wise_recall = tp / (tp + fn + 1e-10)
+    cl_wise_f1 = 2 * (cl_wise_precision * cl_wise_recall) / (cl_wise_precision + cl_wise_recall + 1e-10)
+    cl_wise_accuracy = (tp + tn) / (tp + tn + fp + fn + 1e-10)
+    
+    # Mean metrics (only for classes that appear in the dataset)
+    valid_classes = n_pixels > 0
+    mean_precision = np.mean(cl_wise_precision[valid_classes]) if np.any(valid_classes) else 0.0
+    mean_recall = np.mean(cl_wise_recall[valid_classes]) if np.any(valid_classes) else 0.0
+    mean_f1 = np.mean(cl_wise_f1[valid_classes]) if np.any(valid_classes) else 0.0
+    mean_accuracy = np.mean(cl_wise_accuracy[valid_classes]) if np.any(valid_classes) else 0.0
+    
+    # Dice coefficient (similar to F1 but different formulation)
+    cl_wise_dice = 2 * tp / (2 * tp + fp + fn + 1e-10)
+    mean_dice = np.mean(cl_wise_dice[valid_classes]) if np.any(valid_classes) else 0.0
 
     return {
+        # IoU metrics
         "frequency_weighted_IU": frequency_weighted_IU,
         "mean_IU": mean_IU,
-        "class_wise_IU": cl_wise_score
+        "class_wise_IU": cl_wise_iou,
+        
+        # Accuracy metrics
+        "pixel_accuracy": pixel_accuracy,
+        "mean_accuracy": mean_accuracy,
+        "class_wise_accuracy": cl_wise_accuracy,
+        
+        # Precision, Recall, F1
+        "mean_precision": mean_precision,
+        "mean_recall": mean_recall,
+        "mean_f1": mean_f1,
+        "class_wise_precision": cl_wise_precision,
+        "class_wise_recall": cl_wise_recall,
+        "class_wise_f1": cl_wise_f1,
+        
+        # Dice coefficient
+        "mean_dice": mean_dice,
+        "class_wise_dice": cl_wise_dice,
+        
+        # Raw counts for debugging
+        "class_wise_tp": tp,
+        "class_wise_fp": fp,
+        "class_wise_fn": fn,
+        "class_wise_tn": tn,
+        "class_wise_pixels": n_pixels,
+        "total_pixels": total_pixels,
+        "correct_pixels": correct_pixels
     }
